@@ -67,3 +67,18 @@ body.dark-mode .list-group-item {
 body.dark-mode .btn-close {
     filter: invert(1); 
 }
+
+/* Style Login Sederhana */
+.login-body {
+    background-color: #fff;
+}
+
+.login.card {
+    width: 100%;
+    max-width: 400px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #f8f9fa;  
+}
+
