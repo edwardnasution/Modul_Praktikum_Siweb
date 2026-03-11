@@ -1,13 +1,3 @@
-<?php
-session_start();
-
-if (isset($_SESSION['user'])) {
-    header("Location: index.php");
-    exit();
-}
-
-$error = isset($_GET['error']) ? $_GET['error'] : '';
-?>
 <!doctype html>
 <html lang="en">
 
@@ -16,18 +6,15 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
     <title>Login - Sistem Manajemen Sepatu</title>
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-        crossorigin="anonymous" />
-    <link rel="stylesheet" href="css/style.css" />
+        rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 </head>
 
 <body class="login-body">
     <div class="d-flex flex-column min-vh-100">
-        <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="index.php">CIBADUYUT SHOES</a>
+                <a class="navbar-brand" href="{{ route('home') }}">CIBADUYUT SHOES</a>
 
                 <div class="d-flex align-items-center ms-auto gap-2">
                     <button id="btn-theme" class="btn btn-outline-light btn-sm">
@@ -37,7 +24,6 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
             </div>
         </nav>
 
-        <!-- Main Content -->
         <div class="flex-grow-1 d-flex align-items-center justify-content-center">
             <div class="login-card card p-5">
                 <div class="text-center mb-4">
@@ -45,17 +31,19 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
                     <p class="text-muted">Masuk ke Sistem Manajemen Sepatu</p>
                 </div>
 
-                <?php if ($error === 'invalid'): ?>
+                @if(session('error'))
                     <div class="alert alert-danger" role="alert">
-                        Username atau Password salah!
+                        {{ session('error') }}
                     </div>
-                <?php endif; ?>
+                @endif
 
-                <form method="POST" action="controller/proses_login.php">
+                <form method="POST" action="{{ route('login.proses') }}">
+                    @csrf 
+                    
                     <div class="mb-3">
                         <label class="form-label">Username</label>
                         <input type="text" name="username" class="form-control"
-                            value="<?php echo $_COOKIE['username'] ?? ''; ?>" required>
+                            value="{{ request()->cookie('username') ?? '' }}" required>
                     </div>
 
                     <div class="mb-3">
@@ -73,23 +61,19 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
                     </button>
 
                     <div class="text-center mt-3">
-                        <a href="index.php" class="text-secondary">Kembali ke Beranda</a>
+                        <a href="{{ route('home') }}" class="text-secondary">Kembali ke Beranda</a>
                     </div>
                 </form>
             </div>
         </div>
 
-        <!-- Footer -->
         <footer class="bg-dark text-white text-center p-3 mt-auto">
             &copy; 2026 Sistem Manajemen Sepatu Toko Sepatu.
         </footer>
     </div>
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
-    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 </body>
 
 </html>
