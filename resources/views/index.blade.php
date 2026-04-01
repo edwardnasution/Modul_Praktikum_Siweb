@@ -76,7 +76,7 @@
 
   <div class="d-flex justify-content-between mb-3">
     <h3 class="mb-4">Daftar Sepatu</h3>
-    <a href="{{ route('products') }}" class="text-decoration-none text-black mb-3">
+    <a href="{{ route('products') }}" class="text-decoration-none text-black mb-3 theme-link">
       Lihat Semua Produk >>>
     </a>
   </div>

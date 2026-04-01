@@ -82,3 +82,12 @@ body.dark-mode .btn-close {
     background-color: #f8f9fa;  
 }
 
+/* Theme-aware link color */
+.theme-link {
+    color: #000 !important;
+}
+
+body.dark-mode .theme-link {
+    color: #fff !important;
+}
+
